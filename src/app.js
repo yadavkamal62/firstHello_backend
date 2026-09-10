@@ -5,22 +5,22 @@ const PORT = process.env.PORT
 const connectDB = require("./config/Database");
 const User = require("./models/user")
 
-app.post("/signup", (req, res) => {
+// signup api
+app.post("/signup",async(req,res)=>{
 
+    const user= new User({
+        firstName:"ujjval",
+        lastName:"yadav",
+        emailId:"ky1232@gmail.com",
+        password:"lsdkvmjskdnva"
 
-    const user = new User({
-        firstName: "kamal",
-        lastName: "yadav",
-        emailId: "ky1661@gmail.com",
-        password: "kamal2005"
     })
     try{
-    user.save();
-    res.send("user added  successfully")
+        await user.save()
+        res.send("user added")
 
-    }catch (err){
-        res.status(400).send("error saving" + err.massage )
-
+    }catch(err){
+        err.status(400).send("error saving to user"+ err.massage)
     }
 })
 
