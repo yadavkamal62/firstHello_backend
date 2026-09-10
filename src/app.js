@@ -5,22 +5,18 @@ const PORT = process.env.PORT
 const connectDB = require("./config/Database");
 const User = require("./models/user")
 
+app.use(express.json());//this is a middelware
+
 // signup api
 app.post("/signup",async(req,res)=>{
 
-    const user= new User({
-        firstName:"ujjval",
-        lastName:"yadav",
-        emailId:"ky1232@gmail.com",
-        password:"lsdkvmjskdnva"
-
-    })
+   const user =new User(req.body)
     try{
         await user.save()
         res.send("user added")
 
     }catch(err){
-        err.status(400).send("error saving to user"+ err.massage)
+        err.send("error saving to user"+ err.massage)
     }
 })
 
